@@ -1,0 +1,18 @@
+service: fullstack-lambda
+
+provider:
+  name: aws
+  runtime: python3.10
+  region: us-east-1
+  environment:
+    MONGO_URI: mongodb://mongodb:27017/
+
+functions:
+  processOrders:
+    handler: app.lambda_handler.process_orders
+    events:
+      - http:
+          path: process-orders
+          method: post
+    memorySize: 128
+    timeout: 10

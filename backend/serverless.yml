@@ -1,0 +1,15 @@
+service: sales-report-lambda
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  environment:
+    MONGO_URI: "mongodb://localhost:27017/"
+    S3_BUCKET: "relatorios-bucket"
+
+functions:
+  generateSalesReport:
+    handler: lambda_sales_report.generate_sales_report
+    events:
+      - schedule: rate(1 day)  # Executa diariamente
